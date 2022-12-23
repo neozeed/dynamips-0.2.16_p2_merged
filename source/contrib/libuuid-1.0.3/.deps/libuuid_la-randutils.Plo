@@ -1,0 +1,45 @@
+libuuid_la-randutils.lo: randutils.c d:/mingw/include/stdio.h \
+ d:/mingw/include/_mingw.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stdarg.h \
+ d:/mingw/include/sys/types.h d:/mingw/include/unistd.h \
+ d:/mingw/include/io.h d:/mingw/include/process.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h \
+ d:/mingw/include/stdint.h d:/mingw/include/getopt.h \
+ d:/mingw/include/fcntl.h d:/mingw/include/stdlib.h \
+ d:/mingw/include/string.h d:/mingw/include/sys/time.h \
+ d:/mingw/include/time.h randutils.h
+
+d:/mingw/include/stdio.h:
+
+d:/mingw/include/_mingw.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stdarg.h:
+
+d:/mingw/include/sys/types.h:
+
+d:/mingw/include/unistd.h:
+
+d:/mingw/include/io.h:
+
+d:/mingw/include/process.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h:
+
+d:/mingw/include/stdint.h:
+
+d:/mingw/include/getopt.h:
+
+d:/mingw/include/fcntl.h:
+
+d:/mingw/include/stdlib.h:
+
+d:/mingw/include/string.h:
+
+d:/mingw/include/sys/time.h:
+
+d:/mingw/include/time.h:
+
+randutils.h:

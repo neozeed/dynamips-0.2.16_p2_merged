@@ -1,0 +1,27 @@
+libuuid_la-unpack.lo: unpack.c d:/mingw/include/string.h \
+ d:/mingw/include/_mingw.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h uuidP.h \
+ d:/mingw/include/inttypes.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h \
+ d:/mingw/include/stdint.h d:/mingw/include/sys/types.h uuid.h \
+ d:/mingw/include/time.h
+
+d:/mingw/include/string.h:
+
+d:/mingw/include/_mingw.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h:
+
+uuidP.h:
+
+d:/mingw/include/inttypes.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h:
+
+d:/mingw/include/stdint.h:
+
+d:/mingw/include/sys/types.h:
+
+uuid.h:
+
+d:/mingw/include/time.h:

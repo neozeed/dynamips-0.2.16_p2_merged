@@ -1,0 +1,166 @@
+The Boot ROM
+
+The Cisco Boot ROM firmware contains startup diagnostic code (ROM monitor, or ROMmon) as well as the boot loader for the Cisco Internetworking Operating System, or IOS for short.
+During early boot, the code in the boot ROM performs a Power-on Self Test (POST) and, if all tests are passed, boot into IOS from the flash.
+The Boot ROM CLI
+In order to gain access to the monitor in the Boot ROM, send a break sequence to the device early on in the boot process. This can be done with a C-a f (Ctrl+a f) in Minicom, for example.
+Recently boot ROMs have had an undocumented priv command. This command then can be used to gain access to several additional commands, including a debugger, disassembler and additional hardware tests. To use this command, a secret password is required, known only to Cisco representatives. However, in recent times this has been cracked and the password for many models of Cisco routers can be calculated using the tool at http://ers.pp.ru/cisco/priv.html.
+This is the list of commands available on the C3640 :
+rommon 6 > help
+addrloop            walk 1 thru range of addresses
+alias               set and display aliases command
+alter               alter locations in memory
+berrscan            scan range of addresses for bus errors
+boot                boot up an external process
+break               set/show/clear the breakpoint
+call                call a subroutine at address with converted hex args
+cat                 concatenate files
+checksum            checksum a block of memory
+clrerr              clear the error log
+compare             compare two blocks of memory
+confreg             configuration register utility
+cont                continue executing a downloaded image
+context             display the context of a loaded image
+cookie              display contents of cookie PROM in hex
+cpu                 cpu / system information and control
+cycles              excercise the hardware with all possible cycles
+dev                 list the device table
+dir                 list files in file system
+dis                 disassemble instruction stream
+dnld                serial download a program module
+dram                verify DRAM
+dump                display a block of memory
+echo                monitor echo command
+errlog              display the error log
+fdump               file dump utility
+fill                fill a block of memory
+flash               flash services command
+frame               print out a selected stack frame
+help                monitor builtin command help
+history             monitor command history
+ifill               fill a block of memory w/incrementing pattern
+initfs              re-initialize the file system access structures
+jump                call a subroutine at address with argc/argv
+launch              launch a downloaded image
+leds                check out the error LED
+memdebug            write/read/verify scope loop
+meminfo             main memory information
+memloop             write or read scope loop
+memtest             simple memory test
+menu                main diagnostic menu
+move                move a block of memory
+partest             memory parity test
+repeat              repeat a monitor command
+reset               system reset
+set                 display the monitor variables
+sleep               millisecond sleep command
+speed               timed performance loop
+stack               produce a stack trace
+sync                write monitor environment to NVRAM
+sysret              print out info from last system return
+tcal                timer calibration test
+tlbdump             display the cpu TLB
+tlbflush            flush the TLB
+tlbmap              initialize a TLB mapping
+tlbpid              set/display process ID number
+tlbphy              search TLB for physical translation
+tlbtest             test the TLB
+tlbscan             scan for TLB exceptions
+tlbvir              search TLB for a virtual translation
+tscope              timer scope loop
+unalias             unset an alias
+unset               unset a monitor variable
+watchdog            test watchdog rebooting of the box
+xmodem              x/ymodem image download
+Environment variables
+Boot ROM maintains certain system configuration parameters in environment variables. For example, the $MONRC can contain a starup command sequence, $PS1 contains the command prompt, and so forth. As well, the BootROM supports basic command aliasing. Both the environment variables and the alias table are stored in NVRAM so that their values persist, even when power is off.
+The Boot ROM API
+The Boot ROM API provides some simple APIs for IOS (for example, putchar and version information commands). Unlike many other firmwares in the world of MIPS, the syscall opcode is used to call these firmware APIs. Note that register a0 must contain the syscall number.
+A sample "Hello, world!" program can be found here.
+To load this hello world program, you will need to enter in the private mode of the rommon. To accomplish this, follow the instructions from http://ers.msk.ru/cisco/priv.html .
+Once done, you can test sending the file using xmodem :
+rommon 8 > xmodem -r
+Do not start the sending program yet...
+
+Invoke this application only for disaster recovery.
+Do you wish to continue? y/n  [n]:  y
+Ready to receive file help ...
+
+Download Complete!
+program load complete, entry point: 0x80008000, size: 0x4c
+Hello World!
+
+
+
+
+
+PRIV online password calculator 
+
+password := (i1+...+i5) mod 2^16 
+
+where i1...i5 first five words in cookie
+
+Also this features working on 1600,3600,7500
+
+P.S.: for 7500 password not need
+
+Cisco 3640:
+
+System Bootstrap, Version 11.1(20)AA2, EARLY DEPLOYMENT RELEASE SOFTWARE (fc1)
+Copyright (c) 1999 by cisco Systems, Inc.
+
+rommon 1 > cookie
+
+cookie:
+00 01 00 03 e3 bd 0d 40 0a ff ...
+rommon 2 > priv
+Password: fc00
+You now have access to the full set of monitor commands.
+Warning: some commands will allow you to destroy your
+configuration and/or system images and could render
+the machine unbootable.
+rommon 3 >
+
+Cisco 7513:
+
+System Bootstrap, Version 11.1(2) [nitin 2], RELEASE SOFTWARE (fc1)
+Copyright (c) 1994 by cisco Systems, Inc.
+SLOT 6 RSP2 is system master
+RSP2 processor with 131072 Kbytes of main memory
+
+monitor: command "boot" aborted due to user interrupt
+rommon 1 > priv
+You now have access to the full set of monitor commands.
+Warning: some commands will allow you to destroy your
+configuration and/or system images and could render
+the machine unbootable.
+rommon 2 >
+
+
+
+
+rommon 1 > cookie
+cookie:
+01 01 00 05 51 4d 0f 81 43 20 00 8f 00 92 00 20
+00 00 00 00 00 00 00 00 4a 41 44 05 09 30 37 57
+4c 02 03 00 00 00 00 00 00 ff ff ff 60 06 49 0b
+18 0d ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+rommon 2 > priv
+Password: a4f4
+
+rommon 1 > cookie
+EEPROM contents (hex):
+0x00: 04 ff c1 8b 4a 41 32 30 31 33 36 30 17 58 30 09
+0x10: 34 40 00 b3 c0 46 03 20 00 12 81 02 42 42 30 85
+0x20: 1c 0c a2 02 80 ff ff ff ff c4 08 ff ff ff ff ff
+0x30: ff ff ff 81 ff ff ff ff 03 ff 04 ff c5 08 ff ff
+0x40: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+0x50: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+0x60: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+0x70: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+rommon 2 > priv 
+Password: f1bf

@@ -1,0 +1,29 @@
+libuuid_la-unparse.lo: unparse.c d:/mingw/include/stdio.h \
+ d:/mingw/include/_mingw.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stdarg.h \
+ d:/mingw/include/sys/types.h uuidP.h d:/mingw/include/inttypes.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h \
+ d:/mingw/include/stdint.h uuid.h d:/mingw/include/time.h
+
+d:/mingw/include/stdio.h:
+
+d:/mingw/include/_mingw.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stdarg.h:
+
+d:/mingw/include/sys/types.h:
+
+uuidP.h:
+
+d:/mingw/include/inttypes.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h:
+
+d:/mingw/include/stdint.h:
+
+uuid.h:
+
+d:/mingw/include/time.h:

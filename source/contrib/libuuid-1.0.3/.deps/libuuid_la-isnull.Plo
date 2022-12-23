@@ -1,0 +1,24 @@
+libuuid_la-isnull.lo: isnull.c uuidP.h d:/mingw/include/inttypes.h \
+ d:/mingw/include/_mingw.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h \
+ d:/mingw/include/stdint.h \
+ d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h \
+ d:/mingw/include/sys/types.h uuid.h d:/mingw/include/time.h
+
+uuidP.h:
+
+d:/mingw/include/inttypes.h:
+
+d:/mingw/include/_mingw.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stdint.h:
+
+d:/mingw/include/stdint.h:
+
+d:/mingw/lib/gcc/mingw32/5.1.0/include/stddef.h:
+
+d:/mingw/include/sys/types.h:
+
+uuid.h:
+
+d:/mingw/include/time.h:

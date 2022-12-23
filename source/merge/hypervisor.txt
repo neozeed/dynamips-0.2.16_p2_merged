@@ -1,0 +1,88 @@
+
+Sample session to create, start a router
+
+--->hypervisor version
+--->hypervisor reset
+--->hypervisor working_dir "C:\temp\dynamips\hyper"
+--->vm create R1 0 c7200
+--->vm set_con_tcp_port R1 2000
+--->c7200 set_npe R1 npe-400
+--->vm set_ram R1 512
+--->c7200 set_npe R1 npe-400
+--->vm set_ios R1 "c:\temp\dynamips\c7200-ipbase-mz.150-1.M.image"
+--->vm set_sparse_mem R1 0
+--->vm set_blk_direct_jump R1 0
+--->vm slot_add_binding R1 1 0 PA-4T+
+--->vm slot_add_binding R1 0 0 C7200-IO-FE
+--->vm set_idle_pc R1 0x6024acc8
+--->vm start R1
+--->vm stop R1
+--->hypervisor reset
+
+
+sample session to create 2 routers, connect start, and  destroy
+
+--->hypervisor version
+
+--->hypervisor reset
+
+--->hypervisor working_dir "C:\temp\dynamips\hyper"
+
+--->vm create R1 0 c7200
+
+--->vm set_con_tcp_port R1 2000
+
+--->c7200 set_npe R1 npe-400
+
+--->vm set_ram R1 512
+
+--->c7200 set_npe R1 npe-400
+
+--->vm set_ios R1 "c:\temp\dynamips\c7200-ipbase-mz.150-1.M.image"
+
+--->vm set_sparse_mem R1 0
+
+--->vm set_blk_direct_jump R1 0
+
+--->vm slot_add_binding R1 1 0 PA-4T+
+
+--->vm slot_add_binding R1 0 0 C7200-IO-FE
+
+--->vm create R2 1 c7200
+
+--->vm set_con_tcp_port R2 2001
+
+--->c7200 set_npe R2 npe-400
+
+--->vm set_ram R2 512
+
+--->c7200 set_npe R2 npe-400
+
+--->vm set_ios R2 "c:\temp\dynamips\c7200-ipbase-mz.150-1.M.image"
+
+--->vm set_sparse_mem R2 0
+
+--->vm set_blk_direct_jump R2 0
+
+--->vm slot_add_binding R2 1 0 PA-4T+
+
+--->vm slot_add_binding R2 0 0 C7200-IO-FE
+
+--->nio create_udp nio_udp0 10000 127.0.0.1 10001
+
+--->nio create_udp nio_udp1 10001 127.0.0.1 10000
+
+--->vm slot_add_nio_binding R1 1 0 nio_udp0
+
+--->vm slot_add_nio_binding R2 1 0 nio_udp1
+
+--->vm set_idle_pc R1 0x6024acc8
+
+--->vm set_idle_pc R2 0x6024acc8
+
+--->vm start R1
+--->vm start R2
+--->vm stop R1
+--->vm stop R2
+--->hypervisor reset
+

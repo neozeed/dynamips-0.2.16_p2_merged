@@ -1,0 +1,92 @@
+this is... very untested, but basically the MIPS JIT code from stable and the PowerPC JIT from unstable worked in my
+less than extensive testing.
+
+So I mashed them together in the merge directory.
+
+I'm building with some version of MinGW I found to buld PCem.
+
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=d:/mingw/bin/../libexec/gcc/mingw32/5.1.0/lto-wrapper.exe
+Target: mingw32
+Configured with: ../../../src/gcc-5.1.0/configure --build=mingw32 --enable-languages=ada,c,c++,fortran,lto,objc,obj-c++ --enable-libgomp --enable-lto --enable-graphite --enable-libstdcxx-debug --enable-threads=posix --enable-version-specific-runtime-libs --enable-fully-dynamic-string --enable-libstdcxx-threads --enable-libstdcxx-time --with-gnu-ld --disable-werror --disable-nls --disable-win32-registry --disable-symvers --enable-cxx-flags='-fno-function-sections -fno-data-sections -DWINPTHREAD_STATIC' --prefix=/mingw32tdm --with-local-prefix=/mingw32tdm --with-pkgversion=tdm-1 --enable-sjlj-exceptions --with-bugurl=http://tdm-gcc.tdragon.net/bugs
+Thread model: posix
+gcc version 5.1.0 (tdm-1)
+
+Sigh.  But it does build!
+
+My extensive testing has been the following PowerPC:
+dynamips.exe -X -T 7200 -P 1700 -t 1710  -r 64 c1700-y-mz.120-7.T.bin
+
+And MIPS:
+dynamips.exe -X -T 7200 -P 7200 -t npe-150 -p 0:C7200-IO-FE -T 7200 c7200-is-mz.120-7.T3.bin
+
+And from the hypervisor:
+
+
+c:\>telnet localhost 7200
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+hypervisor version
+100-0.2.15-MinGW-experimentalBuild-3-x86
+hypervisor module_list
+101 object_store
+101 vm_debug
+101 vm
+101 ethsw
+101 atm_bridge
+101 atmsw
+101 frsw
+101 nio_bridge
+101 nio
+101 hypervisor
+101 c1700
+101 c2600
+101 c2691
+101 c3745
+101 c3725
+101 c3600
+101 c7200
+100-OK
+hypervisor reset
+100-OK
+hypervisor stop
+100-OK
+Connection closed by foreign host.
+
+
+There is a very hokey default console, you REALLY should setup telnet 
+console access.  The CPU runs very VERY high.  I haven't even looked at it.
+
+Memory leaks?  Yeah tonnes, even the 'real thing' has them. 
+I've even introduced my own shutting stuff down, as it'll crash trying
+to free blocks that have weird addresses in them.  Not 0x00000000, but 
+some values.
+
+64bit?  Well it compiles, but the JIT doesn't work.
+
+Help I need more than 2GB of ram!
+disk files.. I thought of out of processes RAM servers but the OS probably
+can diskcache diskmemory faster?  Otherwise, move the thing into COM+/DCOM
+so that each instance gets it's own memory space, so it won't matter memory
+wise.  If 64bit goes nowhere then that'll be the direction.
+
+For anyone without IOS I found some 'hello world' program!  In the ciscohello
+directory.  It crashes dynamips nicely.
+
+Connected to Dynamips VM "default" (ID 0, type c3600) - Console port
+Press ENTER to get the prompt.
+ROMMON emulation microcode.
+
+Launching IOS image at 0x80008000...
+Hello World!
+Image returned to ROM.
+
+
+
+
+
+
+
+

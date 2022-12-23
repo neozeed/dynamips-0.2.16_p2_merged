@@ -1,0 +1,36 @@
+Release Notes for Cisco router simulator (Dynamips)
+===================================================
+
+Version:  v0.2.16
+
+Release date:  Wenesday, March 16st, 2016 (2016-03-16)
+
+Source code:  https://github.com/GNS3/dynamips/tree/v0.2.16
+
+License: GNU GPLv2
+
+
+What's New since v0.2.15
+========================
+
+    - Add instructions to build on Windows.
+    - Remove libuuid dependency and NIO Multicast implementation that depends on it. NIO Multicast is never used and maybe not even functional. This will simplify the compilation requirements, especially on Windows with Cygwin.
+    - EthernetSwitch: Allow to choose ethertype for QinQ outer tag.
+
+Known Issues
+============
+
+Reload from the router console doesn't work.
+  - https://github.com/GNS3/dynamips/issues/6
+
+Using a self decompressing image can lead to an invalid IA and stop the cpu.
+  - https://github.com/GNS3/dynamips/issues/8
+
+Packet transmission rate is limited.
+  - https://github.com/GNS3/dynamips/issues/46
+
+c1700 IOS Images start once and then fail to boot on second boot
+  - https://github.com/GNS3/dynamips/issues/54
+
+There is lots of missing hardware functionality.
+There are memory leaks.
